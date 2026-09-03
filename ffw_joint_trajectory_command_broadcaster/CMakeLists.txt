@@ -15,6 +15,7 @@ set(THIS_PACKAGE_INCLUDE_DEPENDS
   controller_interface
   generate_parameter_library
   pluginlib
+  rclcpp
   rclcpp_lifecycle
   rcutils
   realtime_tools
@@ -73,6 +74,22 @@ install(
   RUNTIME DESTINATION bin
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
+)
+
+################################################################################
+# Mini-Leader/A3 standalone support nodes
+################################################################################
+add_executable(gripper_trigger src/gripper_trigger.cpp)
+target_compile_features(gripper_trigger PUBLIC cxx_std_17)
+ament_target_dependencies(gripper_trigger rclcpp sensor_msgs std_msgs)
+
+add_executable(follower_joint_state_relay src/follower_joint_state_relay.cpp)
+target_compile_features(follower_joint_state_relay PUBLIC cxx_std_17)
+ament_target_dependencies(follower_joint_state_relay rclcpp sensor_msgs)
+
+install(
+  TARGETS gripper_trigger follower_joint_state_relay
+  DESTINATION lib/ffw_joint_trajectory_command_broadcaster
 )
 
 ################################################################################

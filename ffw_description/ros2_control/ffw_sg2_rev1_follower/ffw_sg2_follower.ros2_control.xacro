@@ -569,7 +569,8 @@
         <param name="Position D Gain">400</param>
         <param name="Feedforward 1st Gain">30</param>
         <param name="Feedforward 2nd Gain">30</param>
-      </gpio>
+        <param name="Homing Offset">-1</param>
+</gpio>
       <gpio name="dxl62">
         <param name="type">dxl</param>
         <param name="ID">62</param>
@@ -590,7 +591,8 @@
         <param name="Position D Gain">200</param>
         <param name="Feedforward 1st Gain">20</param>
         <param name="Feedforward 2nd Gain">20</param>
-      </gpio>
+        <param name="Homing Offset">29</param>
+</gpio>
       <!-- LEFT WHEEL -->
       <gpio name="dxl101">
         <param name="type">dxl</param>

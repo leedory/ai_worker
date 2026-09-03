@@ -103,6 +103,7 @@ def launch_setup(context, *args, **kwargs):
     xacro_path = LaunchConfiguration('xacro_path')
 
     custom_baseline = LaunchConfiguration('custom_baseline')
+    canonical_head_enabled = LaunchConfiguration('canonical_head_enabled')
 
     enable_gnss = LaunchConfiguration('enable_gnss')
     gnss_antenna_offset = LaunchConfiguration('gnss_antenna_offset')
@@ -298,6 +299,30 @@ def launch_setup(context, *args, **kwargs):
     )
     return_array.append(load_composable_node)
 
+    # The ZED-M has no native 640x480 mode. Keep its calibrated HD720
+    # acquisition and publish the SG2 canonical 4:3 stream from the rectified
+    # left image. This remains part of the single camera-only launch.
+    canonical_head_node = Node(
+        condition=IfCondition(canonical_head_enabled),
+        package='ffw_bringup',
+        executable='head_camera_remap',
+        name='head_camera_remap',
+        output='screen',
+        parameters=[{
+            'input_image_topic': f'/{namespace_val}/{node_name_val}/left/image_rect_color',
+            'input_camera_info_topic': f'/{namespace_val}/{node_name_val}/left/camera_info',
+            'output_image_topic': '/head_camera/color/image_rect/compressed',
+            'output_camera_info_topic': '/head_camera/color/camera_info',
+            'output_width': 640,
+            'output_height': 480,
+            'output_fx': 489.7808024,
+            'output_fy': 489.7808024,
+            'output_cx': 320.0,
+            'output_cy': 240.0263,
+        }],
+    )
+    return_array.append(canonical_head_node)
+
     return return_array
 
 
@@ -311,10 +336,17 @@ def generate_launch_description():
                             'model and it will be used as node `namespace`.'),
             DeclareLaunchArgument(
                 'camera_model',
-                description='[REQUIRED] The model of the camera. Using a wrong camera model '
-                            'can disable camera features.',
+                default_value='zedm',
+                description='SG2 head camera model. Override only when the installed ZED differs.',
                 choices=['zed', 'zedm', 'zed2', 'zed2i', 'zedx', 'zedxm', 'virtual',
                          'zedxonegs', 'zedxone4k']),
+            DeclareLaunchArgument(
+                'canonical_head_enabled',
+                default_value='true',
+                description=(
+                    'Publish the SG2 canonical 640x480 head-camera stream from '
+                    'the rectified ZED left image.'),
+                choices=['true', 'false']),
             DeclareLaunchArgument(
                 'container_name',
                 default_value='',

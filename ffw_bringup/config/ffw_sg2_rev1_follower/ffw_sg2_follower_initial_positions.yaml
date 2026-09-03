@@ -10,9 +10,9 @@
         - arm_l_joint6
         - arm_l_joint7
         - gripper_l_joint1
-      step_names: [home]
-      home: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
-      duration: 5.0
+      step_names: [home3]
+      home3: [0.0005, 0.6040, -0.2963, -2.5052, 0.5672, 0.4926, 0.7391, 0.0]
+      duration: 8.0
       position_tolerance: 0.1
       velocity_tolerance: 0.01
       action_topic: '/arm_l_controller/follow_joint_trajectory'
@@ -30,9 +30,9 @@
         - arm_r_joint6
         - arm_r_joint7
         - gripper_r_joint1
-      step_names: [home]
-      home: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
-      duration: 5.0
+      step_names: [home3]
+      home3: [0.0005, -0.6040, 0.2963, -2.5052, -0.5672, 0.4926, -0.7391, 0.0]
+      duration: 8.0
       position_tolerance: 0.1
       velocity_tolerance: 0.01
       action_topic: '/arm_r_controller/follow_joint_trajectory'
@@ -44,8 +44,8 @@
       joint_names:
         - head_joint1
         - head_joint2
-      step_names: [home]
-      home: [0.0, 0.0]
+      step_names: [home3]
+      home3: [0.2, 0.0]
       duration: 5.0
       position_tolerance: 0.1
       velocity_tolerance: 0.01

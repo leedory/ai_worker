@@ -1,0 +1,12 @@
+# Written by ffw_april_head_calibration save_delta (std_srvs/Trigger).
+saved_at_unix_sec: 1787550575.276108
+pulse_resolution: 2048
+reference_pulse:
+  head_joint1: 257
+  head_joint2: -20
+current_pulse:
+  head_joint1: 256
+  head_joint2: 9
+delta_pulse:
+  head_joint1: -1
+  head_joint2: 29
