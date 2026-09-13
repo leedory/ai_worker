@@ -70,7 +70,7 @@ jobs:
         uses: ros-tooling/action-ros-ci@v0.3
         with:
           target-ros2-distro: ${{ matrix.ros_distribution }}
-          vcs-repo-file-url: "https://raw.githubusercontent.com/ROBOTIS-GIT/ai_worker/${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}/ai_worker_ci.repos"
+          vcs-repo-file-url: "https://raw.githubusercontent.com/${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name || github.repository }}/${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}/ai_worker_ci.repos"
           package-name: |
             ffw
             ffw_bringup
