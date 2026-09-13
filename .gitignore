@@ -532,3 +532,5 @@ doc/
 ## GurumDDS
 *.ar
 
+# Local editor/merge backups
+*.orig

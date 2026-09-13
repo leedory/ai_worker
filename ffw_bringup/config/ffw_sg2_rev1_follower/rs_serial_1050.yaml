@@ -1,0 +1,4 @@
+# Manual RealSense role mapping for ffw-SNPR48A1050.
+# camera1=left wrist, camera2=right wrist; the head camera is a ZED-M.
+camera1_serial: "'335122270624'"
+camera2_serial: "'335122272052'"

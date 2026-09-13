@@ -374,8 +374,13 @@ def load_auto_realsense_serials():
 
 
 def load_manual_realsense_serials():
-    manual_path = os.path.join(
-        get_package_share_directory('ffw_bringup'), 'config', 'common', 'rs_serial.yaml')
+    manual_path = os.environ.get(
+        'FFW_RS_SERIAL_PATH',
+        os.path.join(
+            get_package_share_directory('ffw_bringup'),
+            'config',
+            'common',
+            'rs_serial.yaml'))
     serials = yaml_to_dict(manual_path)
     if serials:
         get_logger('camera_realsense').info(
@@ -399,14 +404,14 @@ local_parameters = [{'name': 'camera_name1', 'default': 'camera_left',
                      'description': 'camera2 namespace'},
                     {'name': 'camera_namespace3', 'default': 'camera_head',
                      'description': 'camera3 namespace'},
-                    {'name': 'depth_module.depth_profile1', 'default': '480,270,30',
-                     'description': 'depth stream profile for camera1'},
-                    {'name': 'depth_module.depth_profile2', 'default': '480,270,30',
-                     'description': 'depth stream profile for camera2'},
-                    {'name': 'depth_module.color_profile1', 'default': '424,240,30',
-                     'description': 'Depth module color stream profile for d405 camera1'},
-                    {'name': 'depth_module.color_profile2', 'default': '424,240,30',
-                     'description': 'Depth module color stream profile for d405 camera2'},
+                    {'name': 'depth_module.depth_profile1', 'default': '640,480,15',
+                     'description': 'Companion 640x480@15 depth profile for d405 camera1'},
+                    {'name': 'depth_module.depth_profile2', 'default': '640,480,15',
+                     'description': 'Companion 640x480@15 depth profile for d405 camera2'},
+                    {'name': 'depth_module.color_profile1', 'default': '640,480,15',
+                     'description': 'Canonical 640x480@15 color profile for d405 camera1'},
+                    {'name': 'depth_module.color_profile2', 'default': '640,480,15',
+                     'description': 'Canonical 640x480@15 color profile for d405 camera2'},
                     {'name': 'colorizer.enable1', 'default': 'true',
                      'description': 'enable colorizer filter for camera1'},
                     {'name': 'colorizer.enable2', 'default': 'true',
